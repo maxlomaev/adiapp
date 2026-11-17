@@ -95,6 +95,7 @@ function SearchObjects() {
   const [anno, setAnno] = useState('')
   const [des, setDes] = useState('')
   const [cat, setCat] = useState('')
+  const [premio, setPremio] = useState('')
   const designers = useMemo(
     () => [...new Set(Object.values(OBJECTS).flatMap((o) => o.designers))].sort((a, b) => DESIGNERS[a].name.localeCompare(DESIGNERS[b].name)),
     [],
@@ -106,6 +107,7 @@ function SearchObjects() {
     if (anno) p.set('anno', anno)
     if (des) p.set('designer', des)
     if (cat) p.set('cat', cat)
+    if (premio) p.set('premio', premio)
     go(`risultati?${p}`)
   }
   return (
@@ -118,7 +120,7 @@ function SearchObjects() {
       </Field>
       <div className="adv-head">
         <h2 className="section-title">Ricerca avanzata</h2>
-        <button type="button" className="link-reset" onClick={() => { setQ(''); setAnno(''); setDes(''); setCat('') }}>Azzera</button>
+        <button type="button" className="link-reset" onClick={() => { setQ(''); setAnno(''); setDes(''); setCat(''); setPremio('') }}>Azzera</button>
       </div>
       <Field label="Anno">
         <Select value={anno} onChange={setAnno} placeholder="Tutti gli anni" options={YEARS.map((y) => [y, y])} />
@@ -129,6 +131,9 @@ function SearchObjects() {
       <Field label="Categoria">
         <Select value={cat} onChange={setCat} placeholder="Tutte le categorie" options={Object.entries(CATEGORIES).map(([k, c]) => [k, c.title])} />
       </Field>
+      <Field label="Tipo di premio">
+        <Select value={premio} onChange={setPremio} placeholder="Tutti i premi" options={PREMI} />
+      </Field>
       <Button type="submit" icon={<Icon.ArrowRight size={18} />} className="btn-block mt-24">Cerca oggetti</Button>
       <div className="hint-card">
         <div className="hint-title"><Icon.Filter size={18} /> Modula la ricerca</div>
@@ -137,6 +142,8 @@ function SearchObjects() {
     </form>
   )
 }
+
+const PREMI = [['cdo', 'Compasso d’Oro'], ['menzione', 'Menzione d’onore'], ['carriera', 'Compasso d’Oro alla carriera']]
 
 function Select({ value, onChange, placeholder, options }) {
   return (
@@ -158,8 +165,13 @@ function SearchPeople({ kind }) {
   const linked = Object.keys(source).filter((id) => (isDes ? hasPage.designer(id) : hasPage.company(id)))
   const term = q.trim().toLowerCase()
   const matches = term ? linked.filter((id) => source[id].name.toLowerCase().includes(term)) : []
-  const suggestions = isDes ? ['castiglioni', 'delucchi', 'giugiaro'] : ['artemide', 'alessi', 'fiat']
-  const open = (id) => go(`${isDes ? 'designer' : 'azienda'}/${id}`)
+  const suggestions = isDes ? ['castiglioni', 'delucchi', 'mari', 'magistretti'] : ['artemide', 'olivetti', 'alessi', 'fiat']
+  const open = (id) => {
+    if (linked.includes(id)) return go(`${isDes ? 'designer' : 'azienda'}/${id}`)
+    const objs = isDes ? objectsBy(id) : objectsOf(id)
+    if (objs.length) return go(`risultati?${isDes ? 'designer' : 'azienda'}=${id}`)
+    toast(`Scheda di ${source[id].name} non inclusa nel prototipo`)
+  }
   const submit = (e) => {
     e.preventDefault()
     if (matches.length) open(matches[0])
@@ -190,7 +202,9 @@ function SearchPeople({ kind }) {
           const thumb = isDes ? e.thumb ?? e.portrait : e.logo
           return (
             <button key={id} type="button" className="suggest-row" onClick={() => open(id)}>
-              <span className={`suggest-thumb ${isDes ? '' : 'is-logo'}`}><img src={img(thumb)} alt="" /></span>
+              <span className={`suggest-thumb ${isDes ? '' : 'is-logo'}`}>
+                {thumb ? <img src={img(thumb)} alt="" /> : <span className="suggest-initial">{e.wordmark ?? e.name.split(' ').map((w) => w[0]).join('').slice(0, 2)}</span>}
+              </span>
               <span className="suggest-name">{e.name}</span>
               <Icon.ArrowUpRight size={16} />
             </button>
@@ -216,6 +230,7 @@ export function Risultati({ params }) {
     if (params.get('designer') && !o.designers.includes(params.get('designer'))) return false
     if (params.get('azienda') && o.company !== params.get('azienda')) return false
     if (params.get('cat') && o.category !== params.get('cat')) return false
+    if (params.get('premio') && (o.award ?? 'cdo') !== params.get('premio')) return false
     return true
   })
   const title = params.get('designer') && !q && !params.get('anno') && !params.get('cat')
@@ -255,14 +270,12 @@ export function Lens() {
     const t = setTimeout(() => replace('match'), LENS_DELAY)
     return () => clearTimeout(t)
   }, [replace])
+  // в макете нет кнопки затвора: распознавание идёт само, тап по кадру ускоряет
   return (
-    <div className="lens">
+    <div className="lens" onClick={() => replace('match')}>
       <img src={img('camera')} alt="" className="lens-feed" draggable="false" />
-      <button className="lens-close" onClick={back} aria-label="Chiudi" />
+      <button className="lens-close" onClick={(e) => { e.stopPropagation(); back() }} aria-label="Chiudi" />
       <div className="lens-scan" />
-      <div className="lens-bottom">
-        <button className="shutter" onClick={() => replace('match')} aria-label="Scatta" />
-      </div>
     </div>
   )
 }
@@ -270,21 +283,23 @@ export function Lens() {
 export function Match() {
   const { go, replace } = useApp()
   return (
-    <div className="page">
-      <section className="match-card">
-        <div className="match-banner">Corrispondenza trovata</div>
-        <div className="match-photo"><img src={img('panda')} alt="Fiat Panda" /></div>
-        <div className="match-body">
-          <div className="match-title">Panda</div>
-          <Button className="btn-block btn-lg" icon={<Icon.ArrowRight size={18} />} onClick={() => go('oggetto/panda')}>Vai alla scheda</Button>
-          <button className="link-quiet" onClick={() => replace('ricerca/oggetti')}>Non è l’oggetto giusto? Cerca ancora</button>
-        </div>
+    <div className="page match-page">
+      <section className="match-hero">
+        <img src={img('panda')} alt="Fiat Panda" />
+        <span className="match-badge">Corrispondenza trovata</span>
+        <div className="match-title">Panda</div>
+        <button className="btn btn-gold match-go" onClick={() => go('oggetto/panda')}>
+          <span>Vai alla scheda</span><Icon.ArrowRight size={16} />
+        </button>
       </section>
-      <section className="match-card">
-        <div className="match-photo is-snap"><img src={img('panda-snap')} alt="Il tuo snap" /></div>
-        <div className="match-body">
-          <Button variant="slate" className="btn-block btn-lg" icon={<Icon.ArrowRight size={18} />} onClick={() => go('condividi')}>Condividi snap</Button>
-        </div>
+      <section className="card match-card">
+        <img src={img('panda-snap')} alt="Il tuo snap" className="match-snap" />
+        <button className="btn btn-dark match-share" onClick={() => go('condividi')}>
+          <Icon.Share2 size={16} /><span>Condividi nella snap gallery</span>
+        </button>
+      </section>
+      <section className="card match-card">
+        <button className="match-retry" onClick={() => replace('ricerca/oggetti')}>Non è l’oggetto giusto? Cerca ancora</button>
       </section>
     </div>
   )
@@ -310,7 +325,7 @@ export function Condividi() {
           </Field>
         </div>
       </section>
-      <Button variant="slate" className="btn-block btn-lg" iconLeft={<Icon.Share size={18} />} onClick={() => addSnap(caption)}>
+      <Button variant="dark" className="btn-block btn-lg btn-share" iconLeft={<Icon.Share2 size={16} />} onClick={() => addSnap(caption)}>
         Condividi nella snap gallery
       </Button>
     </div>
@@ -505,7 +520,7 @@ export function Designer({ id }) {
       <section className="card profile-card">
         <Kicker>Designer</Kicker>
         <Title>{d.lines[0]}<br />{d.lines[1]}</Title>
-        {d.award && <div className="award-line small">{d.award}</div>}
+        {d.award && <div className="award-line designer">{d.award}</div>}
         <div className="hero-photo">
           <Photo name={d.photo} alt={d.name} className="rounded" />
           <SaveFab kind="designer" id={id} label={d.name} />
@@ -551,6 +566,9 @@ export function Azienda({ id }) {
         <span className="stat-num">{c.count}</span>
         <span className="stat-label">Oggetti nella<br />collezione storica<br />Compasso d’Oro</span>
       </div>
+      <a className="btn btn-gold btn-block site-btn" href={c.site} target="_blank" rel="noreferrer">
+        <span>Visita il sito {c.short ?? c.name}</span><Icon.External size={12} />
+      </a>
       <TextCard title="Storia" paragraphs={c.story} />
       {objs.length > 0 && (
         <Rail title={<>Oggetti {c.name}<br />nella collezione</>} onAll={() => go(`risultati?azienda=${id}`)}>
@@ -586,6 +604,21 @@ export function Archivio({ id }) {
             <div><Kicker>Premiazione</Kicker>17 settembre 1981</div>
             <div><Kicker>Mostra</Kicker>Triennale Milano</div>
           </div>
+        )}
+        {isPanda && (
+          <>
+            <div className="also-title">Altri premiati del 1981</div>
+            <div className="also-row">
+              {[['praxis', 'Praxis 35', 'Olivetti', 'Mario Bellini'], ['wiz', 'Wiz', 'Wizco', 'Rodolfo Bonetto'], [null, 'D70', 'Tecno', '']].map(([im, n, m, d]) => (
+                <div key={n} className="also-item">
+                  <div className="also-img">{im && <img src={img(im)} alt="" />}</div>
+                  <div className="also-name">{n}</div>
+                  <div className="meta-maker">{m}</div>
+                  {d && <div className="meta-designer">{d}</div>}
+                </div>
+              ))}
+            </div>
+          </>
         )}
       </section>
       <h2 className="section-title pad">Categorie di materiale</h2>

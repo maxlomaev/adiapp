@@ -25,7 +25,8 @@ export const Flash = (p) => <I {...p} fill="currentColor" stroke="none"><path d=
 export const Filter = (p) => <I {...p}><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0" /><circle cx="16" cy="6" r="2" /><circle cx="10" cy="12" r="2" /><circle cx="18" cy="18" r="2" /></I>
 export const Sort = (p) => <I {...p}><path d="m8 9 4-4 4 4M8 15l4 4 4-4" /></I>
 export const Share = (p) => <I {...p}><path d="M12 15V3M7 8l5-5 5 5M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6" /></I>
-export const Sparkle = (p) => <I {...p} fill="currentColor" stroke="none"><path d="M10 2l1.8 5.2L17 9l-5.2 1.8L10 16l-1.8-5.2L3 9l5.2-1.8zM18 13l.9 2.1L21 16l-2.1.9L18 19l-.9-2.1L15 16l2.1-.9z" /></I>
+export const Share2 = (p) => <I {...p}><circle cx="18" cy="5" r="3" /><circle cx="6" cy="12" r="3" /><circle cx="18" cy="19" r="3" /><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4" /></I>
+export const Sparkle =(p) => <I {...p} fill="currentColor" stroke="none"><path d="M10 2l1.8 5.2L17 9l-5.2 1.8L10 16l-1.8-5.2L3 9l5.2-1.8zM18 13l.9 2.1L21 16l-2.1.9L18 19l-.9-2.1L15 16l2.1-.9z" /></I>
 export const Archive = (p) => <I {...p}><rect x="3" y="4" width="18" height="5" rx="1" /><path d="M5 9v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9M10 13h4" /></I>
 export const Cart = (p) => <I {...p} fill="currentColor" stroke="none"><path d="M3 3h2.4l.6 3H21l-2 8H7.4l-.4-2-1.6-7H3zm5 15.5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm9 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z" /></I>
 export const Tag = (p) => <I {...p} fill="currentColor" stroke="none"><path d="M3 12V4a1 1 0 0 1 1-1h8l9 9-9 9zm5-4.5A1.5 1.5 0 1 0 8 10a1.5 1.5 0 0 0 0-3z" /></I>

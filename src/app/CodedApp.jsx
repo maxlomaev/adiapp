@@ -67,7 +67,7 @@ function titleOf(route) {
     case 'gallery': return 'snap gallery'
     case 'collezione': return 'la mia collezione'
     case 'match': return 'corrispondenza'
-    case 'oggetto': return id === 'panda' ? 'Fiat Panda' : OBJECTS[id].name
+    case 'oggetto': return OBJECTS[id].name
     case 'designer': return DESIGNERS[id].name
     case 'azienda': return COMPANIES[id].name
     case 'archivio': return 'archivio'
