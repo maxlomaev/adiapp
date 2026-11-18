@@ -25,7 +25,7 @@ export function AppHeader() {
   return (
     <header className="app-header">
       <button className="brand" onClick={() => reset('esplora')} aria-label="ADI Snap — Esplora">
-        <img src={img('logo', 'png')} alt="" width="40" height="43" />
+        <img src={img('marchio')} alt="" width="50" height="40" />
         <span>ADI<br />SNAP</span>
       </button>
       <button
@@ -73,7 +73,7 @@ export function BackLink() {
   if (!prevTitle) return null
   return (
     <button className="backlink" onClick={back}>
-      <Icon.ArrowLeft size={14} strokeWidth={2.5} /> Torna a {prevTitle}
+      <Icon.ArrowLeft size={14} strokeWidth={2.5} /><span>Torna a {prevTitle}</span>
     </button>
   )
 }
@@ -111,7 +111,7 @@ export function SaveFab({ kind, id, label }) {
   const on = isSaved(kind, id)
   return (
     <button className={`save-fab ${on ? 'is-on' : ''}`} onClick={() => toggleSave(kind, id, label)} aria-pressed={on} aria-label="Salva">
-      <Icon.Bookmark size={20} filled />
+      <Icon.Bookmark size={16} filled={on} strokeWidth={2.4} />
     </button>
   )
 }
@@ -136,8 +136,9 @@ export function SaveMark({ kind, id, label }) {
 export function ObjectCard({ id, showAward = true }) {
   const { go } = useApp()
   const o = OBJECTS[id]
+  const linked = hasPage.object(id)
   return (
-    <article className="card obj-card" onClick={() => go(`oggetto/${id}`)}>
+    <article className={`card obj-card ${linked ? '' : 'is-static'}`} onClick={() => linked && go(`oggetto/${id}`)}>
       <div className="obj-card-photo">
         <img src={img(o.image)} alt={o.name} loading="lazy" draggable="false" />
         {showAward && <AwardPill year={o.year} className="on-photo" />}
@@ -163,8 +164,9 @@ export const Meta = ({ o }) => (
 export function MiniCard({ id }) {
   const { go } = useApp()
   const o = OBJECTS[id]
+  const linked = hasPage.object(id)
   return (
-    <article className="card mini-card" onClick={() => go(`oggetto/${id}`)}>
+    <article className={`card mini-card ${linked ? '' : 'is-static'}`} onClick={() => linked && go(`oggetto/${id}`)}>
       <img src={img(o.image)} alt={o.name} loading="lazy" draggable="false" />
       <div className="mini-card-body">
         <div className="mini-title">{o.name}</div>
@@ -174,11 +176,11 @@ export function MiniCard({ id }) {
   )
 }
 
-export function Rail({ title, onAll, children }) {
+export function Rail({ title, onAll, narrow, children }) {
   return (
     <section className="rail">
       <div className="rail-head">
-        <h2 className="section-title">{title}</h2>
+        <h2 className={`rail-title ${narrow ? 'is-narrow' : ''}`}>{title}</h2>
         {onAll && <button className="link-all" onClick={onAll}>Vedi tutti</button>}
       </div>
       <div className="rail-track">{children}</div>
@@ -205,7 +207,7 @@ export function PersonRow({ kind, id }) {
         <span className="person-kind">{isDesigner ? 'Designer' : 'Produttore'}</span>
         <span className="person-name">{entity.name}</span>
       </span>
-      <Icon.Chevron size={18} className="person-chevron" />
+      {linked && <Icon.Chevron size={16} strokeWidth={2.6} className="person-chevron" />}
     </button>
   )
 }

@@ -25,7 +25,7 @@ const valid = (route) => {
     case 'esplora': case 'lens': case 'match': case 'condividi': case 'gallery': case 'risultati': return true
     case 'ricerca': return ['oggetti', 'progettisti', 'aziende'].includes(id)
     case 'collezione': return ['snap', 'oggetti', 'aziende', 'designer'].includes(id)
-    case 'oggetto': return !!OBJECTS[id]
+    case 'oggetto': return !!OBJECTS[id]?.story
     case 'archivio': return !!OBJECTS[id]?.archive
     case 'guida': return !!OBJECTS[id]?.market
     case 'designer': return !!DESIGNERS[id]?.bio

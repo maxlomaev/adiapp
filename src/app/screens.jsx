@@ -16,36 +16,39 @@ const LENS_DELAY = 3200
 export function Esplora() {
   const { go } = useApp()
   const searches = [
-    ['Ricerca oggetti', 'ricerca/oggetti', 'esplora-oggetti', 'baked'],
-    ['Ricerca progettisti', 'ricerca/progettisti', 'hero-castiglioni', 'faded'],
-    ['Ricerca aziende', 'ricerca/aziende', 'esplora-aziende', 'baked'],
+    ['Ricerca oggetti', 'ricerca/oggetti', 'esp-ogg', 'is-solid'],
+    ['Ricerca progettisti', 'ricerca/progettisti', 'esp-prog', ''],
+    ['Ricerca aziende', 'ricerca/aziende', 'esp-az', ''],
   ]
   return (
-    <div className="page">
+    <div className="page esplora">
       <section className="hero-card">
+        <img src={img('esp-hero')} alt="" className="deco" draggable="false" />
         <h1 className="hero-title">Il design a portata di mano.</h1>
         <p className="hero-text">
           Riconosci subito qualsiasi oggetto della Collezione Storica Compasso d’Oro. Scopri la sua storia, chi l’ha
           disegnato e l’azienda che lo produce, e condividi il tuo scatto nella Snap Gallery.
         </p>
-        <Button iconLeft={<Icon.Plus size={18} />} className="btn-tall" onClick={() => go('lens')}>
-          Scatta e condividi<br />nuovo snap
-        </Button>
+        <button className="btn-esp hero-btn" onClick={() => go('lens')}>
+          <Icon.Plus size={18} /><span>Scatta e condividi<br />nuovo snap</span>
+        </button>
       </section>
 
-      {searches.map(([label, to, bg, mode]) => (
-        <section key={to} className={`search-card is-${mode}`} onClick={() => go(to)}>
-          <img src={img(bg)} alt="" draggable="false" />
-          <Button className="search-card-btn">{label}</Button>
+      {searches.map(([label, to, bg, mod]) => (
+        <section key={to} className={`search-card ${mod}`} onClick={() => go(to)}>
+          <img src={img(bg)} alt="" className="deco" draggable="false" />
+          <button className="btn-esp">{label}</button>
         </section>
       ))}
 
       <div className="tiles">
-        <a className="tile" href="https://www.adi-design.org" target="_blank" rel="noreferrer">
-          <img src={img('tile-adi')} alt="Sito ADI" />
+        <a className="search-card tile" href="https://www.adi-design.org" target="_blank" rel="noreferrer">
+          <img src={img('esp-adi')} alt="" className="deco" />
+          <span className="btn-esp">Sito ADI</span>
         </a>
-        <a className="tile" href="https://www.adidesignmuseum.org" target="_blank" rel="noreferrer">
-          <img src={img('tile-museo')} alt="ADI Design Museum" />
+        <a className="search-card tile is-solid" href="https://www.adidesignmuseum.org" target="_blank" rel="noreferrer">
+          <img src={img('esp-museo')} alt="" className="deco" />
+          <span className="btn-esp">Il museo</span>
         </a>
       </div>
     </div>
@@ -111,7 +114,7 @@ function SearchObjects() {
     go(`risultati?${p}`)
   }
   return (
-    <form onSubmit={submit}>
+    <form onSubmit={submit} className="search-form">
       <Field label="Nome dell’oggetto">
         <span className="input">
           <Icon.Search size={18} />
@@ -122,6 +125,7 @@ function SearchObjects() {
         <h2 className="section-title">Ricerca avanzata</h2>
         <button type="button" className="link-reset" onClick={() => { setQ(''); setAnno(''); setDes(''); setCat(''); setPremio('') }}>Azzera</button>
       </div>
+      <div className="filters">
       <Field label="Anno">
         <Select value={anno} onChange={setAnno} placeholder="Tutti gli anni" options={YEARS.map((y) => [y, y])} />
       </Field>
@@ -134,9 +138,10 @@ function SearchObjects() {
       <Field label="Tipo di premio">
         <Select value={premio} onChange={setPremio} placeholder="Tutti i premi" options={PREMI} />
       </Field>
-      <Button type="submit" icon={<Icon.ArrowRight size={18} />} className="btn-block mt-24">Cerca oggetti</Button>
-      <div className="hint-card">
-        <div className="hint-title"><Icon.Filter size={18} /> Modula la ricerca</div>
+      </div>
+      <button type="submit" className="btn-search">Cerca oggetti<Icon.ArrowRight size={16} /></button>
+      <div className="hint-card" style={{ marginTop: 4 }}>
+        <div className="hint-title"><Icon.Filter size={16} /><span>Modula la ricerca</span></div>
         <p>Puoi usare anche un solo filtro. Lascia tutti i campi liberi per esplorare l’intera collezione.</p>
       </div>
     </form>
@@ -152,10 +157,12 @@ function Select({ value, onChange, placeholder, options }) {
         <option value="">{placeholder}</option>
         {options.map(([v, l]) => <option key={v} value={v}>{l}</option>)}
       </select>
-      <Icon.ChevronDown size={18} />
+      <Icon.ChevronDown size={16} />
     </span>
   )
 }
+
+const SUGG_IMG = { castiglioni: 'sugg-castiglioni', delucchi: 'sugg-delucchi', mari: 'sugg-mari', magistretti: 'sugg-magistretti' }
 
 function SearchPeople({ kind }) {
   const { go, toast } = useApp()
@@ -179,7 +186,7 @@ function SearchPeople({ kind }) {
   }
   const list = term ? matches : suggestions
   return (
-    <form onSubmit={submit}>
+    <form onSubmit={submit} className="search-form people">
       <Field label={isDes ? 'Nome o cognome del progettista' : 'Nome dell’azienda'}>
         <span className="input">
           <Icon.Search size={18} />
@@ -191,15 +198,13 @@ function SearchPeople({ kind }) {
           />
         </span>
       </Field>
-      <Button type="submit" icon={<Icon.ArrowRight size={18} />} className="btn-block">
-        {isDes ? 'Cerca progettisti' : 'Cerca aziende'}
-      </Button>
-      <section className="card suggest-card">
-        <div className="hint-title big"><Icon.Sparkle size={18} /> {term ? 'Risultati' : 'Suggerimenti per te'}</div>
+      <button type="submit" className="btn-search">{isDes ? 'Cerca progettisti' : 'Cerca aziende'}<Icon.ArrowRight size={16} /></button>
+      <section className="card suggest-card" style={{ marginTop: 8 }}>
+        <div className="suggest-head"><Icon.Sparkle size={16} /><span>{term ? 'Risultati' : 'Suggerimenti per te'}</span></div>
         {list.length === 0 && <p className="muted">Nessun risultato per “{q}”.</p>}
         {list.map((id) => {
           const e = source[id]
-          const thumb = isDes ? e.thumb ?? e.portrait : e.logo
+          const thumb = isDes ? (SUGG_IMG[id] ?? e.thumb ?? e.portrait) : e.logo
           return (
             <button key={id} type="button" className="suggest-row" onClick={() => open(id)}>
               <span className={`suggest-thumb ${isDes ? '' : 'is-logo'}`}>
@@ -288,14 +293,14 @@ export function Match() {
         <img src={img('panda')} alt="Fiat Panda" />
         <span className="match-badge">Corrispondenza trovata</span>
         <div className="match-title">Panda</div>
-        <button className="btn btn-gold match-go" onClick={() => go('oggetto/panda')}>
-          <span>Vai alla scheda</span><Icon.ArrowRight size={16} />
+        <button className="match-go" onClick={() => go('oggetto/panda')}>
+          Vai alla scheda<Icon.ArrowRight size={16} />
         </button>
       </section>
       <section className="card match-card">
         <img src={img('panda-snap')} alt="Il tuo snap" className="match-snap" />
-        <button className="btn btn-dark match-share" onClick={() => go('condividi')}>
-          <Icon.Share2 size={16} /><span>Condividi nella snap gallery</span>
+        <button className="btn-share" onClick={() => go('condividi')}>
+          <Icon.Share2 size={16} />Condividi nella snap gallery
         </button>
       </section>
       <section className="card match-card">
@@ -309,7 +314,7 @@ export function Condividi() {
   const { addSnap } = useApp()
   const [caption, setCaption] = useState('')
   return (
-    <div className="page">
+    <div className="page share-page">
       <Title size="md" className="center">Condividi il tuo snap</Title>
       <p className="lead center small">Fai scoprire questo oggetto e la sua storia agli altri utenti ADI Snap.</p>
       <section className="card share-card">
@@ -325,9 +330,9 @@ export function Condividi() {
           </Field>
         </div>
       </section>
-      <Button variant="dark" className="btn-block btn-lg btn-share" iconLeft={<Icon.Share2 size={16} />} onClick={() => addSnap(caption)}>
-        Condividi nella snap gallery
-      </Button>
+      <button className="btn-share share-main" onClick={() => addSnap(caption)}>
+        <Icon.Share2 size={16} />Condividi nella snap gallery
+      </button>
     </div>
   )
 }
@@ -361,14 +366,10 @@ function SnapCard({ snap, saveButton }) {
       </div>
       {saveButton && (
         <div className="snap-actions">
-          <Button
-            variant={saved ? 'outline' : 'gold'}
-            className="btn-block btn-save"
-            iconLeft={saved ? <Icon.Check size={16} /> : <Icon.Bookmark size={16} filled />}
-            onClick={() => toggleSave('snap', snap.id, 'Snap')}
-          >
+          <button className={`btn-save ${saved ? 'is-on' : ''}`} onClick={() => toggleSave('snap', snap.id, 'Snap')}>
+            {saved ? <Icon.Check size={14} strokeWidth={3} /> : <Icon.Bookmark size={12} filled />}
             {saved ? 'Salvato nella collezione' : 'Salva nella mia collezione'}
-          </Button>
+          </button>
         </div>
       )}
     </article>
@@ -384,7 +385,7 @@ export function Gallery() {
   const usedCats = [...new Set(snaps.filter((s) => !s.hidden).map((s) => OBJECTS[s.object].category))]
   return (
     <div className="page">
-      <Title>Snap gallery</Title>
+      <Title className="gallery-title">Snap gallery</Title>
       <p className="lead">Guarda gli Snap condivisi dagli altri utenti.</p>
       <div className="chip-row">
         <Button variant="dark" className="btn-chip" iconLeft={<Icon.Filter size={14} />} onClick={() => openSheet({
@@ -418,7 +419,7 @@ export function Collezione({ tab }) {
     ids = [...ids].sort((a, b) => name(a).localeCompare(name(b)))
   }
   return (
-    <div className="page">
+    <div className="page coll-page">
       <div className="profile">
         <img src={img('avatar')} alt="" className="profile-avatar" />
         <div>
@@ -469,40 +470,41 @@ export function Collezione({ tab }) {
 // ——— Детальные страницы
 
 export function Oggetto({ id }) {
-  const { go } = useApp()
+  const { go, toast } = useApp()
   const o = OBJECTS[id]
   const related = objectsIn(o.category).filter((x) => x !== id)
+  const soon = () => toast('Disponibile nel prototipo solo per la Panda')
   return (
-    <div className="page">
+    <div className="page detail">
       <BackLink />
-      <Title className="mt-8">{o.lines ? <>{o.lines[0]}<br />{o.lines[1]}</> : o.name}</Title>
+      <Title className="obj-title">{o.lines ? <>{o.lines[0]}<br />{o.lines[1]}</> : o.name}</Title>
       <div className="award-line">{o.year ? `Compasso d’Oro ${o.year}` : 'Collezione storica'}</div>
       <div className="hero-photo">
-        <Photo name={o.image} alt={o.name} className="rounded" />
+        <Photo name={o.image} alt={o.name} className="obj-photo" />
         <SaveFab kind="oggetti" id={id} label={o.name} />
       </div>
-      {o.story && <TextCard title="Storia" paragraphs={o.story} />}
-      {o.motivation && <TextCard title="Motivazione del premio" paragraphs={[`“${o.motivation}”`]} italic />}
-      {o.image2 && <Photo name={o.image2} className="rounded second" />}
-      {o.designers.map((d) => <PersonRow key={d} kind="designer" id={d} />)}
-      <PersonRow kind="company" id={o.company} />
-      {o.archive && (
+      <TextCard title="Storia" paragraphs={o.story} />
+      {o.image2 && <Photo name={o.image2} className="obj-photo second" />}
+      <div className="stack">
+        {o.designers.map((d) => <PersonRow key={d} kind="designer" id={d} />)}
+        <PersonRow kind="company" id={o.company} />
+        {o.motivation && <TextCard title="Motivazione del premio" paragraphs={[`“${o.motivation}”`]} italic />}
         <section className="dark-card">
-          <span className="dark-icon"><Icon.Archive size={18} /></span>
-          <h2 className="card-heading light">Materiale d’archivio</h2>
+          <span className="dark-icon"><Icon.Archive size={14} /></span>
+          <h2 className="dark-title">Materiale d’archivio</h2>
           <p>Informazioni sull’edizione e documenti originali.</p>
-          <Button className="btn-block" onClick={() => go(`archivio/${id}`)}>Esplora</Button>
+          <button className="btn-cta gold" onClick={() => (o.archive ? go(`archivio/${id}`) : soon())}>Esplora</button>
         </section>
-      )}
-      {o.market && (
-        <section className="cream-card">
-          <h2 className="card-heading center">Guida all’acquisto</h2>
-          <p className="center">Analisi aggiornata del mercato.</p>
-          <Button variant="dark" icon={<Icon.Chart size={14} />} className="btn-inline" onClick={() => go(`guida/${id}`)}>Vedi valore di mercato</Button>
-        </section>
-      )}
+      </div>
+      <section className="market-card">
+        <h2 className="card-heading center">Guida all’acquisto</h2>
+        <p className="center">Analisi aggiornata del mercato.</p>
+        <button className="btn-cta dark tall" onClick={() => (o.market ? go(`guida/${id}`) : soon())}>
+          Vedi valore di mercato<Icon.Chart size={10} strokeWidth={3} />
+        </button>
+      </section>
       {related.length > 0 && (
-        <Rail title={<>Altri oggetti nella<br />categoria {CATEGORIES[o.category].title}</>} onAll={() => go(`categoria/${o.category}`)}>
+        <Rail title={`Altri oggetti nella categoria ${CATEGORIES[o.category].title}`} onAll={() => go(`categoria/${o.category}`)}>
           {related.map((r) => <MiniCard key={r} id={r} />)}
         </Rail>
       )}
@@ -515,14 +517,14 @@ export function Designer({ id }) {
   const d = DESIGNERS[id]
   const objs = objectsBy(id)
   return (
-    <div className="page">
+    <div className="page detail">
       <BackLink />
       <section className="card profile-card">
         <Kicker>Designer</Kicker>
-        <Title>{d.lines[0]}<br />{d.lines[1]}</Title>
+        <Title className="obj-title">{d.lines[0]}<br />{d.lines[1]}</Title>
         {d.award && <div className="award-line designer">{d.award}</div>}
         <div className="hero-photo">
-          <Photo name={d.photo} alt={d.name} className="rounded" />
+          <Photo name={d.photo} alt={d.name} className="designer-photo" />
           <SaveFab kind="designer" id={id} label={d.name} />
         </div>
         <blockquote className="big-quote">“{d.quote}”</blockquote>
@@ -544,7 +546,7 @@ export function Designer({ id }) {
         ))}
       </Rail>
       {objs.length > 0 && (
-        <Rail title={<>Oggetti di {d.name}<br />nella collezione</>} onAll={() => go(`risultati?designer=${id}`)}>
+        <Rail title={`Oggetti di ${d.name} nella collezione`} narrow onAll={() => go(`risultati?designer=${id}`)}>
           {objs.map((o) => <MiniCard key={o} id={o} />)}
         </Rail>
       )}
@@ -557,17 +559,17 @@ export function Azienda({ id }) {
   const c = COMPANIES[id]
   const objs = objectsOf(id)
   return (
-    <div className="page">
+    <div className="page detail">
       <BackLink />
-      <Kicker className="mt-8">Produttore</Kicker>
-      <Title>{c.name}</Title>
+      <Kicker className="company-kicker">Produttore</Kicker>
+      <Title className="obj-title">{c.name}</Title>
       <div className="card logo-card"><img src={img(c.logo)} alt={c.name} /></div>
       <div className="card stat-card">
         <span className="stat-num">{c.count}</span>
         <span className="stat-label">Oggetti nella<br />collezione storica<br />Compasso d’Oro</span>
       </div>
-      <a className="btn btn-gold btn-block site-btn" href={c.site} target="_blank" rel="noreferrer">
-        <span>Visita il sito {c.short ?? c.name}</span><Icon.External size={12} />
+      <a className="btn-cta gold tall site-btn" href={c.site} target="_blank" rel="noreferrer">
+        Visita il sito {c.short ?? c.name}<Icon.External size={10} strokeWidth={3} />
       </a>
       <TextCard title="Storia" paragraphs={c.story} />
       {objs.length > 0 && (
@@ -589,9 +591,9 @@ export function Archivio({ id }) {
     [Icon.Video, 'Filmati', 'Pubblicità e materiale informativo dell’epoca', isPanda ? 8 : 3],
   ]
   return (
-    <div className="page">
+    <div className="page detail">
       <BackLink />
-      <Title>Materiale<br />d’archivio</Title>
+      <Title className="obj-title">Materiale<br />d’archivio</Title>
       <section className="card edition-card">
         <div className="poster">
           {isPanda ? <img src={img('poster-1981')} alt="" /> : (
@@ -634,8 +636,8 @@ export function Archivio({ id }) {
         <img src={img('horo')} alt="Archivio Digitale ADI Design Museum" className="horo-img" />
         <h2 className="card-heading light big">Horo</h2>
         <p>HORO è il portale digitale dedicato alla conservazione e valorizzazione del patrimonio documentale del Premio Compasso d’Oro e dell’ADI.</p>
-        <a className="btn btn-gold btn-block" href="https://www.adidesignmuseum.org" target="_blank" rel="noreferrer">
-          <span>Visita Horo</span><Icon.External size={14} />
+        <a className="btn-cta gold" href="https://www.adidesignmuseum.org" target="_blank" rel="noreferrer">
+          Visita Horo<Icon.External size={10} strokeWidth={3} />
         </a>
         {isPanda && (
           <div className="rail-track dark">
@@ -649,8 +651,8 @@ export function Archivio({ id }) {
             <span>Centro Storico Fiat<small>Archivio del produttore</small></span>
           </div>
           <img src={img('video-fiat')} alt="AD FIAT Panda — Young 1987" className="rounded-img" />
-          <a className="btn btn-dark btn-block" href="https://www.centrostoricofiat.it" target="_blank" rel="noreferrer">
-            <span>Visita il centro storico</span><Icon.External size={14} />
+          <a className="btn-cta dark" href="https://www.centrostoricofiat.it" target="_blank" rel="noreferrer">
+            Visita il centro storico<Icon.External size={10} strokeWidth={3} />
           </a>
         </section>
       )}
@@ -663,9 +665,9 @@ export function Guida({ id }) {
   const m = o.market
   const q = encodeURIComponent(`${COMPANIES[o.company].name} ${o.name}`)
   return (
-    <div className="page">
+    <div className="page detail">
       <BackLink />
-      <Title>Guida<br />all’acquisto</Title>
+      <Title className="obj-title">Guida<br />all’acquisto</Title>
       <section className="card buy-card">
         <span className="buy-icon"><Icon.Cart size={22} /></span>
         <h2 className="card-heading center">Acquista nuova</h2>
@@ -678,14 +680,14 @@ export function Guida({ id }) {
           <img src={img(o.image)} alt="" className="used-img" />
           {m.used ? (
             <div className="price-box">
-              <div className="hint-title"><Icon.Chart size={18} /> Prezzo medio</div>
+              <div className="hint-title"><Icon.Chart size={18} /><span>Prezzo medio</span></div>
               {m.used.map(([label, price]) => (
                 <div key={label} className="price-row"><span>{label}</span><b>{price}</b></div>
               ))}
             </div>
           ) : <p className="muted center">Dati di mercato non ancora disponibili per questo oggetto.</p>}
-          <a className="btn btn-dark btn-inline" href={m.link ?? `https://www.subito.it/annunci-italia/vendita/usato/?q=${q}`} target="_blank" rel="noreferrer">
-            <span>Vai a Subito.it</span><Icon.External size={14} />
+          <a className="btn-cta dark tall" href={m.link ?? `https://www.subito.it/annunci-italia/vendita/usato/?q=${q}`} target="_blank" rel="noreferrer">
+            Vai a Subito.it<Icon.External size={8} strokeWidth={3} />
           </a>
         </div>
       </section>

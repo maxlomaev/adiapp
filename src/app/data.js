@@ -245,8 +245,6 @@ export const OBJECTS = {
       'Nel 1973 Vico Magistretti immagina per Cassina il divano Maralunga, con un poggiatesta pieghevole integrato nello schienale e azionato da una comune catena da bicicletta, invisibile all’occhio. Il meccanismo, brevettato, permette di ottenere uno schienale alto o basso e rappresenta un’innovazione senza precedenti nell’ambito degli imbottiti, creando un oggetto che si trasforma a seconda delle esigenze del momento.',
       'Il divano è disponibile da due a tre posti, fino alla versione Maxi, e può essere personalizzato in tessuto o pelle. La collezione si estende a poltrona e pouf, che riprendono il concept del divano con lo stesso meccanismo regolabile.',
     ],
-    archive: true,
-    market: { new: true },
   },
   sity: {
     name: 'Sity',
@@ -261,8 +259,6 @@ export const OBJECTS = {
       'Secondo Piero Ambrogio Busnelli, fondatore di B&B Italia, “Sity ha segnato l’inizio di un’epoca in cui le persone hanno iniziato a stendersi sul divano, perché la casa è fatta per riposare”.',
     ],
     motivation: 'La Giuria della XIV edizione ha deliberato di conferire il Premio Compasso d’oro 1987 al sistema di sedute “Sity” per il costante impegno dell’Azienda strettamente integrato con il contributo del designer ha condotto alla realizzazione di un prodotto tipologicamente avanzato in rapporto ai mutati atteggiamenti comportamentali dell’uomo nella casa. Si avvia così un processo di rinnovamento in un settore che da troppo tempo vedeva l’impegno dei designers costretto ad operare nell’ambito della sola tradizione.',
-    archive: true,
-    market: { new: true },
   },
   sfera: {
     name: 'Sfera',
@@ -277,8 +273,6 @@ export const OBJECTS = {
       'Lo scooter Piaggio Sfera è stato prodotto dal 1990 al 1998. Presentato a Monte Carlo nel 1990, affianca la Vespa con un concept nuovo: la carrozzeria è interamente in plastica, su un telaio a tubo centrale con un tubo di sterzo. Il motore è un monocilindrico raffreddato ad aria, posizionato in modo tale da portare il baricentro in basso e in avanti, garantendo una maneggevolezza ottimale.',
       'È stato il primo scooter con carrozzeria in plastica. Il progetto è della Direzione Tecnica Piaggio ed è una riproposta innovativa di un’icona del trasporto personale italiano. Dalla Sfera derivano il Piaggio Quartz e il Gilera Typhoon.',
     ],
-    archive: true,
-    market: { new: false },
   },
   panigale: {
     name: '1199 Panigale',
@@ -293,8 +287,6 @@ export const OBJECTS = {
       'La Ducati 1199 Panigale è una moto sportiva da 1.198 cc presentata a Milano all’EICMA del 2011 con l’obiettivo di portare prestazioni da competizione in un modello di serie elegante, coerente con l’immagine storica del marchio. Il motore bicilindrico Superquadro è parte integrante di un telaio monoscocca in alluminio, e insieme raggiungono 195 cv con 164 kg a secco. Il nome Superquadro viene dal rapporto tra alesaggio e corsa, 120 × 60,8 mm, mai visto su una moto di serie.',
       'Era disponibile dall’inizio del 2012 nelle versioni 1199 Panigale, S e S Tricolore.',
     ],
-    archive: true,
-    market: { new: false },
   },
   // oggetti senza testo esteso
   fiat500: { name: '500', year: 1959, category: 'automobili', company: 'fiat', designers: ['giacosa'], image: 'fiat500' },
@@ -334,5 +326,10 @@ export const objectsIn = (cat) => Object.entries(OBJECTS).filter(([, o]) => o.ca
 export const objectsBy = (designerId) => Object.entries(OBJECTS).filter(([, o]) => o.designers.includes(designerId)).map(([id]) => id)
 export const objectsOf = (companyId) => Object.entries(OBJECTS).filter(([, o]) => o.company === companyId).map(([id]) => id)
 export const designerNames = (o) => o.designers.map((d) => DESIGNERS[d].name).join(', ')
-export const hasPage = { designer: (id) => !!DESIGNERS[id]?.bio, company: (id) => !!COMPANIES[id]?.story }
+// страницы есть только у того, что нарисовано в макете (с описанием)
+export const hasPage = {
+  object: (id) => !!OBJECTS[id]?.story,
+  designer: (id) => !!DESIGNERS[id]?.bio,
+  company: (id) => !!COMPANIES[id]?.story,
+}
 export const YEARS = [...new Set(Object.values(OBJECTS).map((o) => o.year).filter(Boolean))].sort()
