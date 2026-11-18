@@ -1,0 +1,367 @@
+{
+ "esplora": {
+  "kind": "scroll",
+  "w": 750,
+  "h": 2313,
+  "src": "esplora.png",
+  "cut": [
+   1513,
+   1712
+  ]
+ },
+ "lens": {
+  "kind": "scroll",
+  "w": 750,
+  "h": 1351,
+  "src": "lens.png",
+  "cut": [
+   1513,
+   1712
+  ]
+ },
+ "corrispondenza": {
+  "kind": "scroll",
+  "w": 750,
+  "h": 1915,
+  "src": "corrispondenza.png",
+  "cut": [
+   1513,
+   1712
+  ]
+ },
+ "condividi": {
+  "kind": "scroll",
+  "w": 750,
+  "h": 1319,
+  "src": "Condividi SNAP.png",
+  "cut": [
+   1513,
+   1712
+  ]
+ },
+ "snapgallery": {
+  "kind": "scroll",
+  "w": 750,
+  "h": 3339,
+  "src": "SNAPGALLERY.png",
+  "cut": [
+   1513,
+   1712
+  ]
+ },
+ "coll-snap": {
+  "kind": "scroll",
+  "w": 750,
+  "h": 3089,
+  "src": "COLL/SNAP.png",
+  "cut": [
+   1513,
+   1712
+  ]
+ },
+ "coll-ogg": {
+  "kind": "scroll",
+  "w": 750,
+  "h": 3597,
+  "src": "COLL/OGG.png",
+  "cut": [
+   1513,
+   1712
+  ]
+ },
+ "coll-aziende": {
+  "kind": "scroll",
+  "w": 750,
+  "h": 3169,
+  "src": "COLL/AZIENDE.png",
+  "cut": [
+   1513,
+   1712
+  ]
+ },
+ "coll-designers": {
+  "kind": "scroll",
+  "w": 750,
+  "h": 4169,
+  "src": "COLL/DESIGNERS.png",
+  "cut": [
+   1513,
+   1712
+  ]
+ },
+ "ricerca-oggetti": {
+  "kind": "scroll",
+  "w": 750,
+  "h": 1783,
+  "src": "Ricerca oggetti.png",
+  "cut": [
+   1513,
+   1712
+  ]
+ },
+ "ricerca-progettisti": {
+  "kind": "scroll",
+  "w": 750,
+  "h": 1423,
+  "src": "Ricerca progettisti.png",
+  "cut": [
+   1513,
+   1712
+  ]
+ },
+ "ricerca-aziende": {
+  "kind": "scroll",
+  "w": 750,
+  "h": 1423,
+  "src": "Ricerca aziende.png",
+  "cut": [
+   1513,
+   1712
+  ]
+ },
+ "cat-arredi": {
+  "kind": "scroll",
+  "w": 750,
+  "h": 2985,
+  "src": "arredi complementi casa.png",
+  "cut": [
+   1513,
+   1712
+  ]
+ },
+ "cat-automobili": {
+  "kind": "scroll",
+  "w": 750,
+  "h": 2815,
+  "src": "automobili.png",
+  "cut": [
+   1513,
+   1712
+  ]
+ },
+ "cat-giochi": {
+  "kind": "scroll",
+  "w": 750,
+  "h": 2957,
+  "src": "giochi.png",
+  "cut": [
+   1513,
+   1712
+  ]
+ },
+ "cat-motocicli": {
+  "kind": "scroll",
+  "w": 750,
+  "h": 2815,
+  "src": "motocicli.png",
+  "cut": [
+   1513,
+   1712
+  ]
+ },
+ "panda": {
+  "kind": "scroll",
+  "w": 750,
+  "h": 4317,
+  "src": "panda1981.png",
+  "cut": [
+   1513,
+   1712
+  ]
+ },
+ "sfera": {
+  "kind": "scroll",
+  "w": 750,
+  "h": 4567,
+  "src": "panda1981-1.png",
+  "cut": [
+   1513,
+   1712
+  ]
+ },
+ "sity": {
+  "kind": "scroll",
+  "w": 750,
+  "h": 5535,
+  "src": "panda1981-2.png",
+  "cut": [
+   1513,
+   1712
+  ]
+ },
+ "maralunga": {
+  "kind": "scroll",
+  "w": 750,
+  "h": 4675,
+  "src": "panda1981-3.png",
+  "cut": [
+   1513,
+   1712
+  ]
+ },
+ "panigale": {
+  "kind": "scroll",
+  "w": 750,
+  "h": 4707,
+  "src": "panda1981-4.png",
+  "cut": [
+   1505,
+   1704
+  ]
+ },
+ "archivio": {
+  "kind": "scroll",
+  "w": 750,
+  "h": 5859,
+  "src": "archivio.png",
+  "cut": [
+   1513,
+   1712
+  ]
+ },
+ "guida": {
+  "kind": "scroll",
+  "w": 750,
+  "h": 2207,
+  "src": "guida acquisto.png",
+  "cut": [
+   1513,
+   1712
+  ]
+ },
+ "fiat": {
+  "kind": "scroll",
+  "w": 750,
+  "h": 3379,
+  "src": "fiat.png",
+  "cut": [
+   1513,
+   1712
+  ]
+ },
+ "giugiaro": {
+  "kind": "scroll",
+  "w": 750,
+  "h": 4479,
+  "src": "giugiaro.png",
+  "cut": [
+   1513,
+   1712
+  ]
+ },
+ "alessi": {
+  "kind": "scroll",
+  "w": 750,
+  "h": 3379,
+  "src": "ALESSI.png",
+  "cut": [
+   1513,
+   1712
+  ]
+ },
+ "artemide": {
+  "kind": "scroll",
+  "w": 750,
+  "h": 3379,
+  "src": "ARTEMIDE.png",
+  "cut": [
+   1513,
+   1712
+  ]
+ },
+ "bb": {
+  "kind": "scroll",
+  "w": 750,
+  "h": 3379,
+  "src": "B&b.png",
+  "cut": [
+   1513,
+   1712
+  ]
+ },
+ "boeri": {
+  "kind": "scroll",
+  "w": 750,
+  "h": 4615,
+  "src": "B0ERI.png",
+  "cut": [
+   1513,
+   1712
+  ]
+ },
+ "castiglioni": {
+  "kind": "scroll",
+  "w": 750,
+  "h": 4507,
+  "src": "CASTIGLIONI.png",
+  "cut": [
+   1513,
+   1712
+  ]
+ },
+ "citterio": {
+  "kind": "scroll",
+  "w": 750,
+  "h": 4245,
+  "src": "CITTERIO.png",
+  "cut": [
+   1513,
+   1712
+  ]
+ },
+ "delucchi": {
+  "kind": "scroll",
+  "w": 750,
+  "h": 4519,
+  "src": "DELUCCHI.png",
+  "cut": [
+   1513,
+   1712
+  ]
+ },
+ "desilva": {
+  "kind": "scroll",
+  "w": 750,
+  "h": 3651,
+  "src": "DESILVA.png",
+  "cut": [
+   1513,
+   1712
+  ]
+ },
+ "tut-a1": {
+  "kind": "static",
+  "w": 750,
+  "h": 1712
+ },
+ "tut-a2": {
+  "kind": "static",
+  "w": 750,
+  "h": 1712
+ },
+ "tut-a3": {
+  "kind": "static",
+  "w": 750,
+  "h": 1712
+ },
+ "tut-a4": {
+  "kind": "static",
+  "w": 750,
+  "h": 1712
+ },
+ "tut-b1": {
+  "kind": "static",
+  "w": 780,
+  "h": 2730
+ },
+ "tut-b2": {
+  "kind": "static",
+  "w": 780,
+  "h": 2730
+ },
+ "tut-b3": {
+  "kind": "static",
+  "w": 780,
+  "h": 2730
+ }
+}
