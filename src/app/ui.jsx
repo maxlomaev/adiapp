@@ -21,13 +21,18 @@ export function StatusBar({ dark }) {
 }
 
 export function AppHeader() {
-  const { reset, go, route } = useApp()
+  const { reset, go, route, lang, setLang } = useApp()
   return (
     <header className="app-header">
       <button className="brand" onClick={() => reset('esplora')} aria-label="ADI Snap — Esplora">
         <img src={img('marchio')} alt="" width="50" height="40" />
         <span>ADI<br />SNAP</span>
       </button>
+      <div className="lang-switch" role="group" aria-label="Lingua / Language" data-no-i18n>
+        {['it', 'en'].map((l) => (
+          <button key={l} className={l === lang ? 'is-active' : ''} onClick={() => setLang(l)} aria-pressed={l === lang}>{l.toUpperCase()}</button>
+        ))}
+      </div>
       <button
         className={`search-btn ${route.startsWith('ricerca') ? 'is-active' : ''}`}
         onClick={() => !route.startsWith('ricerca') && go('ricerca/oggetti')}
@@ -140,7 +145,7 @@ export function ObjectCard({ id, showAward = true }) {
   return (
     <article className={`card obj-card ${linked ? '' : 'is-static'}`} onClick={() => linked && go(`oggetto/${id}`)}>
       <div className="obj-card-photo">
-        <img src={img(o.image)} alt={o.name} loading="lazy" draggable="false" />
+        <img src={img(o.card ?? o.image)} alt={o.name} loading="lazy" draggable="false" />
         {showAward && <AwardPill year={o.year} className="on-photo" />}
       </div>
       <div className="obj-card-body">
@@ -167,7 +172,7 @@ export function MiniCard({ id }) {
   const linked = hasPage.object(id)
   return (
     <article className={`card mini-card ${linked ? '' : 'is-static'}`} onClick={() => linked && go(`oggetto/${id}`)}>
-      <img src={img(o.image)} alt={o.name} loading="lazy" draggable="false" />
+      <img src={img(o.mini ?? o.image)} alt={o.name} loading="lazy" draggable="false" />
       <div className="mini-card-body">
         <div className="mini-title">{o.name}</div>
         <div className="mini-sub">{o.year ? `Compasso d’Oro ${o.year}` : 'Collezione storica'}</div>

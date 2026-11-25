@@ -535,3 +535,15 @@
 .search-form.people { gap: 16px; }
 .gallery-title { font-size: 42px; line-height: 42px; letter-spacing: -3px; padding-top: 12px; }
 .share-page .lead { color: var(--g400); font-size: 14px; max-width: 300px; margin: 8px auto 0; }
+
+/* ——— Переключатель языка IT / EN */
+
+.app-header .lang-switch { margin-left: auto; margin-right: 10px; }
+.lang-switch { display: flex; padding: 3px; gap: 2px; border-radius: 9999px; background: var(--g100); }
+.lang-switch button {
+  min-width: 30px; height: 26px; padding: 0 8px !important; border-radius: 9999px !important;
+  font-family: var(--text); font-weight: 800; font-size: 10px; letter-spacing: 1px; color: var(--g500) !important;
+  text-align: center !important; transition: background 0.2s, color 0.2s;
+}
+.lang-switch button.is-active { background: #fff !important; color: var(--ink) !important; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); }
+.entity-logo { height: 243.75px; object-fit: cover; padding: 0; }

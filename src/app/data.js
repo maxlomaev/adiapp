@@ -21,6 +21,7 @@ export const CATEGORIES = {
 
 export const COMPANIES = {
   fiat: {
+    coll: 'coll-fiat',
     name: 'Fiat',
     logo: 'logo-fiat',
     thumb: 'thumb-fiat',
@@ -34,6 +35,7 @@ export const COMPANIES = {
     ],
   },
   alessi: {
+    coll: 'coll-alessi',
     name: 'Alessi',
     logo: 'logo-alessi',
     count: 10,
@@ -46,6 +48,7 @@ export const COMPANIES = {
     ],
   },
   artemide: {
+    coll: 'coll-artemide',
     name: 'Artemide',
     logo: 'logo-artemide',
     count: 6,
@@ -57,6 +60,7 @@ export const COMPANIES = {
     ],
   },
   bb: {
+    coll: 'coll-bb',
     name: 'B&B Italia',
     short: 'B&B',
     logo: 'logo-bb',
@@ -103,15 +107,15 @@ export const DESIGNERS = {
       'Nel 1999 viene nominato “Car Designer of the Century” dal Global Automotive Elections Foundation, riconoscimento che corona una carriera straordinaria dedicata all’innovazione nel design automobilistico.',
     ],
     videos: [
-      { title: 'Il design della Panda', text: 'Intervista esclusiva sul processo creativo dietro la Fiat Panda', time: '15:30 min', thumb: 'video-giugiaro' },
-      { title: 'Come cambia l’auto italiana', text: 'L’influenza di Giugiaro sulla produzione di massa dell’auto italiana', time: '22:15 min' },
+      { title: 'Il design della Panda', text: 'Intervista esclusiva sul processo creativo dietro la Fiat Panda', time: '15:30 min', thumb: 'giugiaro-v1' },
+      { title: 'Come cambia l’auto italiana', text: 'L’influenza di Giugiaro sulla produzione di massa dell’auto italiana', time: '22:15 min', thumb: 'giugiaro-v2' },
     ],
   },
   castiglioni: {
     name: 'Achille Castiglioni',
     lines: ['Achille', 'Castiglioni'],
     photo: 'hero-castiglioni',
-    portrait: 'hero-castiglioni',
+    portrait: 'castiglioni',
     quote: 'L’esperienza non dà certezza né sicurezza, ma anzi aumenta la possibilità di errore. Direi che è meglio ricominciare ogni volta da capo con umiltà perché l’esperienza non rischi di tramutarsi in furbizia.',
     bio: [
       'Nato a Milano il 16 febbraio 1918, è figlio dello scultore Giannino Castiglioni, il cui approccio plastico ha influenzato il suo modo di fare design. Dal 1940 sperimenta prodotti industriali con i fratelli Livio e Pier Giacomo.',
@@ -121,8 +125,8 @@ export const DESIGNERS = {
       'Ha vinto nove Compassi d’Oro, tra cui la lampada Luminator (1955), la sedia T12 (1960), la macchina per il caffè Pitagora (1962) e la lampada Parentesi (1979), più una menzione speciale nel 1989. Quattordici sue opere sono al MoMA di New York. Muore a Milano il 2 dicembre 2002.',
     ],
     videos: [
-      { title: 'Intervista (Designboom)', text: 'Video intervista inedita', time: '15:30 min', thumb: 'video-castiglioni' },
-      { title: 'Intervista (RaiPlay — 2000)', text: 'Art Night rielabora le immagini di un’intervista del 2000.', time: '22:15 min' },
+      { title: 'Intervista (Designboom)', text: 'Video intervista inedita', time: '15:30 min', thumb: 'castiglioni-v1' },
+      { title: 'Intervista (RaiPlay — 2000)', text: 'Art Night rielabora le immagini di un’intervista del 2000.', time: '22:15 min', thumb: 'castiglioni-v2' },
     ],
   },
   boeri: {
@@ -138,8 +142,8 @@ export const DESIGNERS = {
       'Ha progettato anche case, uffici, negozi e allestimenti museali, e ha insegnato in Italia e all’estero. Le sono stati assegnati il Compasso d’Oro alla carriera (2011), la nomina a Grande Ufficiale dell’Ordine al Merito della Repubblica Italiana (2011) e l’Ambrogino d’oro (2019). Muore a Milano il 9 settembre 2020, a 96 anni.',
     ],
     videos: [
-      { title: 'Intervista (1977)', text: 'Intervista esclusiva', time: '15:30 min' },
-      { title: 'Intervista (Domus)', text: 'Intervista inedita', time: '22:15 min' },
+      { title: 'Intervista (1977)', text: 'Intervista esclusiva', time: '15:30 min', thumb: 'boeri-v1' },
+      { title: 'Intervista (Domus)', text: 'Intervista inedita', time: '22:15 min', thumb: 'boeri-v2' },
     ],
   },
   citterio: {
@@ -156,8 +160,8 @@ export const DESIGNERS = {
       'Nel 2000 fonda con Patricia Viel uno studio di architettura, interni e grafica, oggi Antonio Citterio Patricia Viel. Dal 2006 al 2016 è professore di architettura all’Università della Svizzera italiana a Mendrisio. Nel 2008 la Royal Society for the Encouragement of Arts, Manufactures & Commerce di Londra lo nomina Royal Designer for Industry.',
     ],
     videos: [
-      { title: 'Intervista (Domus)', text: 'Intervista esclusiva', time: '15:30 min' },
-      { title: 'Intervista', text: 'Intervista esclusiva', time: '22:15 min' },
+      { title: 'Intervista (Domus)', text: 'Intervista esclusiva', time: '15:30 min', thumb: 'citterio-v1' },
+      { title: 'Intervista', text: 'Intervista esclusiva', time: '22:15 min', thumb: 'citterio-v2' },
     ],
   },
   delucchi: {
@@ -174,8 +178,8 @@ export const DESIGNERS = {
       'Ha progettato edifici e allestimenti per musei come la Triennale di Milano e il Neues Museum di Berlino. Insegna allo IUAV di Venezia (dal 2001) e al Politecnico di Milano (dal 2008) ed è membro dell’Accademia Nazionale di San Luca. Nel 2022 riceve il Compasso d’Oro alla carriera.',
     ],
     videos: [
-      { title: 'Intervista', text: 'Intervista esclusiva', time: '15:30 min' },
-      { title: 'Intervista', text: 'Intervista esclusiva', time: '22:15 min' },
+      { title: 'Intervista', text: 'Intervista esclusiva', time: '15:30 min', thumb: 'delucchi-v1' },
+      { title: 'Intervista', text: 'Intervista esclusiva', time: '22:15 min', thumb: 'delucchi-v2' },
     ],
   },
   desilva: {
@@ -192,8 +196,8 @@ export const DESIGNERS = {
       'Lascia il Gruppo a fine 2015 e nel 2019 fonda lo studio indipendente Walter De Silva Automotive. Ha disegnato anche prodotti fuori dall’auto, come la Leica M9 Titanium e la poltrona Luft per Poltrona Frau. Nel 2011 riceve il Compasso d’Oro alla carriera.',
     ],
     videos: [
-      { title: 'Intervista', text: 'Intervista esclusiva', time: '15:30 min' },
-      { title: 'Intervista', text: 'Intervista esclusiva', time: '22:15 min' },
+      { title: 'Intervista', text: 'Intervista esclusiva', time: '15:30 min', thumb: 'desilva-v1' },
+      { title: 'Intervista', text: 'Intervista esclusiva', time: '22:15 min', thumb: 'desilva-v2' },
     ],
   },
   // designer senza scheda
@@ -223,17 +227,19 @@ export const OBJECTS = {
     image: 'panda',
     image2: 'panda-vintage',
     story: [
-      'Verso la fine degli anni ’70 la necessità di risollevare le sorti della Fiat pone il management davanti a un’intuizione geniale: creare un’utilitaria spartana e funzionale, alla francese, che si distaccasse radicalmente dalla produzione dell’epoca. La realizzazione viene affidata all’Italdesign di Giorgetto Giugiaro, che realizza un progetto all’insegna della semplicità costruttiva e di utilizzo.',
+      'Verso la fine degli anni ’70 la necessità di risollevare le sorti della Fiat pone il management davanti a un’intuizione geniale: creare un’utilitaria spartana e funzionale, alla francese, che si distaccasse radicalmente dalla produzione dell’epoca.',
+      'La realizzazione viene affidata all’Italdesign di Giorgetto Giugiaro, che realizza un progetto all’insegna della semplicità costruttiva e di utilizzo.',
       'La Panda si rivela un grande successo di vendite sin dalla sua introduzione sul mercato nel 1980, e viene aggiornata numerose volte fino all’uscita di produzione ben ventitrè anni dopo.',
     ],
     archive: true,
     market: {
       new: false,
       used: [['Panda 30', '€3.150'], ['Panda 45', '€4.080']],
+      image: 'panda-used',
       link: 'https://www.subito.it/annunci-italia/vendita/auto/?q=fiat+panda+30',
     },
   },
-  maralunga: {
+  maralunga: { card: 'card-maralunga',
     name: 'Maralunga',
     year: 1979,
     category: 'arredi',
@@ -242,11 +248,12 @@ export const OBJECTS = {
     image: 'maralunga',
     image2: 'maralunga-2',
     story: [
-      'Nel 1973 Vico Magistretti immagina per Cassina il divano Maralunga, con un poggiatesta pieghevole integrato nello schienale e azionato da una comune catena da bicicletta, invisibile all’occhio. Il meccanismo, brevettato, permette di ottenere uno schienale alto o basso e rappresenta un’innovazione senza precedenti nell’ambito degli imbottiti, creando un oggetto che si trasforma a seconda delle esigenze del momento.',
+      'Nel 1973 Vico Magistretti immagina per Cassina il divano Maralunga, con un poggiatesta pieghevole integrato nello schienale e azionato da una comune catena da bicicletta, invisibile all’occhio.',
+      'Il meccanismo, brevettato, permette di ottenere uno schienale alto o basso e rappresenta un’innovazione senza precedenti nell’ambito degli imbottiti, creando un oggetto che si trasforma a seconda delle esigenze del momento.',
       'Il divano è disponibile da due a tre posti, fino alla versione Maxi, e può essere personalizzato in tessuto o pelle. La collezione si estende a poltrona e pouf, che riprendono il concept del divano con lo stesso meccanismo regolabile.',
     ],
   },
-  sity: {
+  sity: { card: 'card-sity', mini: 'mini-sity',
     name: 'Sity',
     year: 1987,
     category: 'arredi',
@@ -255,12 +262,13 @@ export const OBJECTS = {
     image: 'sity',
     image2: 'sity-2',
     story: [
-      'Sity è un sistema di sedute progettato da Antonio Citterio per B&B Italia nel 1986. È composto da una sezione a due posti, una angolare e una singola, che può essere usata anche come poltrona. Lo schienale non è fisso e si può togliere o spostare a piacere, mentre tre staffe uniscono i moduli tra loro. Il progetto nasce dall’impegno dell’azienda insieme al progettista per creare un prodotto tipologicamente avanzato rispetto ai nuovi modi di vivere la casa, e avvia un rinnovamento in un settore rimasto a lungo legato alla tradizione.',
+      'Sity è un sistema di sedute progettato da Antonio Citterio per B&B Italia nel 1986. È composto da una sezione a due posti, una angolare e una singola, che può essere usata anche come poltrona.',
+      'Lo schienale non è fisso e si può togliere o spostare a piacere, mentre tre staffe uniscono i moduli tra loro. Il progetto nasce dall’impegno dell’azienda insieme al progettista per creare un prodotto tipologicamente avanzato rispetto ai nuovi modi di vivere la casa, e avvia un rinnovamento in un settore rimasto a lungo legato alla tradizione.',
       'Secondo Piero Ambrogio Busnelli, fondatore di B&B Italia, “Sity ha segnato l’inizio di un’epoca in cui le persone hanno iniziato a stendersi sul divano, perché la casa è fatta per riposare”.',
     ],
     motivation: 'La Giuria della XIV edizione ha deliberato di conferire il Premio Compasso d’oro 1987 al sistema di sedute “Sity” per il costante impegno dell’Azienda strettamente integrato con il contributo del designer ha condotto alla realizzazione di un prodotto tipologicamente avanzato in rapporto ai mutati atteggiamenti comportamentali dell’uomo nella casa. Si avvia così un processo di rinnovamento in un settore che da troppo tempo vedeva l’impegno dei designers costretto ad operare nell’ambito della sola tradizione.',
   },
-  sfera: {
+  sfera: { card: 'card-sfera', mini: 'mini-sfera',
     name: 'Sfera',
     year: 1991,
     category: 'motocicli',
@@ -270,11 +278,12 @@ export const OBJECTS = {
     image: 'sfera',
     image2: 'sfera-2',
     story: [
-      'Lo scooter Piaggio Sfera è stato prodotto dal 1990 al 1998. Presentato a Monte Carlo nel 1990, affianca la Vespa con un concept nuovo: la carrozzeria è interamente in plastica, su un telaio a tubo centrale con un tubo di sterzo. Il motore è un monocilindrico raffreddato ad aria, posizionato in modo tale da portare il baricentro in basso e in avanti, garantendo una maneggevolezza ottimale.',
+      'Lo scooter Piaggio Sfera è stato prodotto dal 1990 al 1998. Presentato a Monte Carlo nel 1990, affianca la Vespa con un concept nuovo: la carrozzeria è interamente in plastica, su un telaio a tubo centrale con un tubo di sterzo.',
+      'Il motore è un monocilindrico raffreddato ad aria, posizionato in modo tale da portare il baricentro in basso e in avanti, garantendo una maneggevolezza ottimale.',
       'È stato il primo scooter con carrozzeria in plastica. Il progetto è della Direzione Tecnica Piaggio ed è una riproposta innovativa di un’icona del trasporto personale italiano. Dalla Sfera derivano il Piaggio Quartz e il Gilera Typhoon.',
     ],
   },
-  panigale: {
+  panigale: { card: 'card-panigale', mini: 'mini-panigale',
     name: '1199 Panigale',
     lines: ['1199', 'Panigale'],
     year: 2014,
@@ -284,7 +293,8 @@ export const OBJECTS = {
     image: 'panigale',
     image2: 'panigale-2',
     story: [
-      'La Ducati 1199 Panigale è una moto sportiva da 1.198 cc presentata a Milano all’EICMA del 2011 con l’obiettivo di portare prestazioni da competizione in un modello di serie elegante, coerente con l’immagine storica del marchio. Il motore bicilindrico Superquadro è parte integrante di un telaio monoscocca in alluminio, e insieme raggiungono 195 cv con 164 kg a secco. Il nome Superquadro viene dal rapporto tra alesaggio e corsa, 120 × 60,8 mm, mai visto su una moto di serie.',
+      'La Ducati 1199 Panigale è una moto sportiva da 1.198 cc presentata a Milano all’EICMA del 2011 con l’obbiettivo di portare prestazioni da competizione in un modello di serie elegante, coerente con l’immagine storica del marchio.',
+      'Il motore bicilindrico Superquadro è parte integrante di un telaio monoscocca in alluminio, e insieme raggiungono 195 cv con 164 kg a secco. Il nome Superquadro viene dal rapporto tra alesaggio e corsa, 120 x 60,8 mm, mai visto su una moto di serie.',
       'Era disponibile dall’inizio del 2012 nelle versioni 1199 Panigale, S e S Tricolore.',
     ],
   },
@@ -297,7 +307,7 @@ export const OBJECTS = {
   trioli: { name: 'Trioli', category: 'giochi', company: 'magis', designers: ['arnio'], image: 'trioli' },
   zizi: { name: 'Zizì', year: 1979, category: 'giochi', company: 'pigomma', designers: ['munari'], image: 'zizi' },
   tender: { name: 'Tender', year: 1984, category: 'motocicli', company: 'quasar', designers: ['chiola'], image: 'tender' },
-  eclisse: { name: 'Eclisse', year: 1967, category: 'illuminazione', company: 'artemide', designers: ['magistretti'], image: 'eclisse-snap' },
+  eclisse: { mini: 'eclisse-mini', name: 'Eclisse', year: 1967, category: 'illuminazione', company: 'artemide', designers: ['magistretti'], image: 'eclisse-snap' },
   parentesi: { name: 'Parentesi', year: 1979, category: 'illuminazione', company: 'flos', designers: ['castiglioni'], image: 'parentesi' },
   espresso9090: { name: 'Espresso 9090', year: 1979, category: 'casa', company: 'alessi', designers: ['sapper'], image: 'espresso9090' },
   strips: { name: 'Strips', year: 1979, category: 'arredi', company: 'arflex', designers: ['boeri'], image: 'strips' },

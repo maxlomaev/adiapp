@@ -3,6 +3,7 @@ import { PHONE_W, PanelGroup, Stage, useViewport } from '../Stage.jsx'
 import { CATEGORIES, COMPANIES, DESIGNERS, INITIAL_SAVED, ME, OBJECTS, SNAPS } from './data.js'
 import * as S from './screens.jsx'
 import { AppHeader, Ctx, StatusBar, TabBar } from './ui.jsx'
+import { translateDom } from './i18n.js'
 import './app.css'
 
 const HOME = 'esplora'
@@ -135,9 +136,34 @@ export default function CodedApp() {
   const [toastMsg, setToastMsg] = useState(null)
   const [sheet, setSheet] = useState(null)
   const [tour, setTour] = useState(() => (state.tourDone || routeFromHash() ? -1 : 0))
+  const [lang, setLangState] = useState(() => {
+    try { return localStorage.getItem('adi-snap-lang') || 'it' } catch { return 'it' }
+  })
   const scroller = useRef(null)
   const scrollMemo = useRef([])
+  const phoneRef = useRef(null)
   const route = stack[stack.length - 1]
+
+  const setLang = useCallback((l) => {
+    setLangState(l)
+    try { localStorage.setItem('adi-snap-lang', l) } catch { /* ignore */ }
+  }, [])
+
+  // перевод поверх отрисованного DOM: после каждого рендера и при любых изменениях (toast, шторка)
+  useLayoutEffect(() => { translateDom(phoneRef.current, lang) })
+  useEffect(() => {
+    const root = phoneRef.current
+    if (!root) return
+    let busy = false
+    const obs = new MutationObserver(() => {
+      if (busy) return
+      busy = true
+      requestAnimationFrame(() => { translateDom(root, lang); busy = false })
+    })
+    obs.observe(root, { subtree: true, childList: true, characterData: true })
+    return () => obs.disconnect()
+  }, [lang])
+  useEffect(() => { document.documentElement.lang = lang }, [lang])
 
   useEffect(() => {
     try { localStorage.setItem(STORE, JSON.stringify(state)) } catch { /* ignore */ }
@@ -223,11 +249,11 @@ export default function CodedApp() {
   const endTour = () => { setTour(-1); setState((s) => ({ ...s, tourDone: true })) }
 
   const ctx = useMemo(() => ({
-    route, go, back, replace, reset, toast,
+    route, go, back, replace, reset, toast, lang, setLang,
     prevTitle: stack.length > 1 ? titleOf(stack[stack.length - 2]) : null,
     openSheet: setSheet,
     saved: state.saved, snaps: state.snaps, isSaved, toggleSave, addSnap,
-  }), [route, go, back, replace, reset, toast, stack, state, isSaved, toggleSave, addSnap])
+  }), [route, go, back, replace, reset, toast, lang, setLang, stack, state, isSaved, toggleSave, addSnap])
 
   // Esc / Backspace — назад
   useEffect(() => {
@@ -246,6 +272,7 @@ export default function CodedApp() {
   const phone = (
     <Ctx.Provider value={ctx}>
       <div
+        ref={phoneRef}
         className="phone c-phone"
         data-tour-active={tour >= 0 ? TOUR[tour].target : undefined}
         style={{ width: PHONE_W, height: vp.height, transform: `scale(${vp.scale})`, '--content-h': `${contentH}px` }}

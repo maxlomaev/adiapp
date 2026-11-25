@@ -270,7 +270,7 @@ function ObjectList({ title, ids }) {
 // ——— Nuovo snap
 
 export function Lens() {
-  const { replace, back } = useApp()
+  const { replace, back, lang } = useApp()
   useEffect(() => {
     const t = setTimeout(() => replace('match'), LENS_DELAY)
     return () => clearTimeout(t)
@@ -278,7 +278,7 @@ export function Lens() {
   // в макете нет кнопки затвора: распознавание идёт само, тап по кадру ускоряет
   return (
     <div className="lens" onClick={() => replace('match')}>
-      <img src={img('camera')} alt="" className="lens-feed" draggable="false" />
+      <img src={img(lang === 'en' ? 'camera-en' : 'camera')} alt="" className="lens-feed" draggable="false" />
       <button className="lens-close" onClick={(e) => { e.stopPropagation(); back() }} aria-label="Chiudi" />
       <div className="lens-scan" />
     </div>
@@ -290,7 +290,7 @@ export function Match() {
   return (
     <div className="page match-page">
       <section className="match-hero">
-        <img src={img('panda')} alt="Fiat Panda" />
+        <img src={img('match-hero')} alt="Fiat Panda" />
         <span className="match-badge">Corrispondenza trovata</span>
         <div className="match-title">Panda</div>
         <button className="match-go" onClick={() => go('oggetto/panda')}>
@@ -298,7 +298,7 @@ export function Match() {
         </button>
       </section>
       <section className="card match-card">
-        <img src={img('panda-snap')} alt="Il tuo snap" className="match-snap" />
+        <img src={img('match-snap')} alt="Il tuo snap" className="match-snap" />
         <button className="btn-share" onClick={() => go('condividi')}>
           <Icon.Share2 size={16} />Condividi nella snap gallery
         </button>
@@ -449,7 +449,7 @@ export function Collezione({ tab }) {
         {tab === 'oggetti' && ids.map((id) => <ObjectCard key={id} id={id} />)}
         {tab === 'aziende' && ids.map((id) => (
           <article key={id} className="card entity-card" onClick={() => go(`azienda/${id}`)}>
-            <img src={img(COMPANIES[id].logo)} alt="" className="entity-logo" />
+            <img src={img(COMPANIES[id].coll ?? COMPANIES[id].logo)} alt="" className="entity-logo" />
             <div className="obj-card-row"><h3 className="card-title">{COMPANIES[id].short ?? COMPANIES[id].name}</h3><SaveMark kind="aziende" id={id} label={COMPANIES[id].name} /></div>
           </article>
         ))}
@@ -611,7 +611,7 @@ export function Archivio({ id }) {
           <>
             <div className="also-title">Altri premiati del 1981</div>
             <div className="also-row">
-              {[['praxis', 'Praxis 35', 'Olivetti', 'Mario Bellini'], ['wiz', 'Wiz', 'Wizco', 'Rodolfo Bonetto'], [null, 'D70', 'Tecno', '']].map(([im, n, m, d]) => (
+              {[['praxis', 'Praxis 35', 'Olivetti', 'Mario Bellini'], ['wiz', 'Wiz', 'Wizco', 'Rodolfo Bonetto'], ['d70', 'D70', 'Tecno', '']].map(([im, n, m, d]) => (
                 <div key={n} className="also-item">
                   <div className="also-img">{im && <img src={img(im)} alt="" />}</div>
                   <div className="also-name">{n}</div>
@@ -677,7 +677,7 @@ export function Guida({ id }) {
         <span className="used-icon"><Icon.Tag size={22} /></span>
         <h2 className="card-heading light center">Mercato dell’usato</h2>
         <div className="used-inner">
-          <img src={img(o.image)} alt="" className="used-img" />
+          <img src={img(m.image ?? o.image)} alt="" className="used-img" />
           {m.used ? (
             <div className="price-box">
               <div className="hint-title"><Icon.Chart size={18} /><span>Prezzo medio</span></div>
